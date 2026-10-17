@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taskly - To Do App</title>
+ <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <h2 class="logo">taskly<span>.</span></h2>
+
+      <p class="menu-title">WORKSPACE</p>
+
+      <nav>
+        <button class="nav-btn active" data-filter="all">
+          All Tasks <span id="allCount">0</span>
+        </button>
+        <button class="nav-btn" data-filter="today">
+          Today
+        </button>
+        <button class="nav-btn" data-filter="upcoming">
+          Upcoming
+        </button>
+        <button class="nav-btn" data-filter="completed">
+          Completed <span id="completedCount">0</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="focus-card">
+          <h3>Small steps.<br>Big progress.</h3>
+          <p>Keep showing up for your goals.</p>
+          <div class="progress-track">
+            <div id="miniProgress"></div>
+          </div>
+          <small id="miniProgressText">0% completed</small>
+        </div>
+
+        <button id="themeToggle" class="theme-button">
+          ☾ Dark mode
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL SPACE</p>
+          <h1 id="greeting">Good morning ✨</h1>
+          <p class="subtitle">Make today count, one task at a time.</p>
+        </div>
+
+        <button class="add-btn" id="openModal">
+          + Add new task
+        </button>
+      </header>
+
+      <section class="stats">
+        <article class="stat-card">
+          <div class="stat-icon purple">▦</div>
+          <p>Total tasks</p>
+          <h2 id="totalTasks">0</h2>
+          <small>Tasks in your workspace</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon green">✓</div>
+          <p>Completed</p>
+          <h2 id="completedTasks">0</h2>
+          <small>Tasks checked off</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon orange">◷</div>
+          <p>Remaining</p>
+          <h2 id="remainingTasks">0</h2>
+          <small>Keep making progress</small>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-icon blue">↗</div>
+          <p>Your progress</p>
+          <h2><span id="progressPercent">0</span>%</h2>
+          <div class="progress-track">
+            <div id="mainProgress"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="task-panel">
+        <div class="panel-heading">
+          <div>
+            <h2 id="listHeading">All Tasks <span id="listCount">0</span></h2>
+            <p>Everything you want to get done.</p>
+          </div>
+
+          <button id="clearCompleted" class="clear-btn">
+            Clear completed
+          </button>
+        </div>
+
+        <div class="toolbar">
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search your tasks..."
+          >
+
+          <select id="sortSelect" aria-label="Sort tasks">
+            <option value="newest">Newest first</option>
+            <option value="due">Due date</option>
+            <option value="priority">Priority</option>
+            <option value="alphabetical">Alphabetical</option>
+          </select>
+        </div>
+
+        <div id="taskList" class="task-list"></div>
+
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">✦</div>
+          <h3>A fresh start!</h3>
+          <p>Your task list is clear. Add a task and make something happen.</p>
+          <button id="emptyAdd" class="add-btn">
+            + Create your first task
+          </button>
+        </div>
+
+        <footer class="list-footer">
+          <span id="footerCount">0 tasks</span>
+          <span>● Saved automatically</span>
+        </footer>
+      </section>
+
+      <footer class="app-footer">
+        Made for your focus <span>✦</span>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Add/Edit Task Modal -->
+  <div class="modal-backdrop" id="taskModal">
+    <section class="modal">
+      <div class="modal-heading">
+        <div>
+          <p class="eyebrow">MAKE IT HAPPEN</p>
+          <h2 id="modalTitle">Create a task</h2>
+        </div>
+        <button id="closeModal" class="close-btn" aria-label="Close">
+          &times;
+        </button>
+      </div>
+
+      <form id="taskForm">
+        <label for="taskTitle">Task name *</label>
+        <input
+          type="text"
+          id="taskTitle"
+          maxlength="140"
+          placeholder="e.g. Finish my portfolio website"
+          required
+        >
+
+        <label for="taskDescription">Description (optional)</label>
+        <textarea
+          id="taskDescription"
+          rows="3"
+          maxlength="400"
+          placeholder="Add some details..."
+        ></textarea>
+
+        <div class="form-row">
+          <div>
+            <label for="taskDue">Due date</label>
+            <input type="date" id="taskDue">
+          </div>
+
+          <div>
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="cancelModal" class="cancel-btn">
+            Cancel
+          </button>
+          <button type="submit" class="add-btn" id="saveButton">
+            Create task →
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="index.js"></script>
+</body>
+</html>
